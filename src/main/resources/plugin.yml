@@ -1,5 +1,5 @@
 name: Fishing
-version: "0.0.1"
+version: "0.0.2"
 api: ["1.0.0"]
-author: solo
+author: solo, PetteriM1
 main: solo.fishing.Main

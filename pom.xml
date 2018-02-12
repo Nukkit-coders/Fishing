@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>solo</groupId>
-	<artifactId>fishing</artifactId>
-	<version>0.0.1</version>
+	<artifactId>Fishing</artifactId>
+	<version>0.0.2</version>
 	<packaging>jar</packaging>
-	
+
 	<repositories>
 		<repository>
 			<id>regularbox</id>
@@ -22,7 +22,7 @@
 	</properties>
 
 	<build>
-		<finalName>${project.name}_Nukkit_v${project.version}</finalName>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
