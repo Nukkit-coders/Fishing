@@ -74,11 +74,6 @@ public class FishSelector{
 			ItemTool tool = (ItemTool) item;
 			tool.setDamage(random.nextInt(tool.getMaxDurability() - 20) + 20);
 			return tool;
-		}else try{
-			int damage = Integer.parseInt(code.split(":")[1]);
-			item.setDamage(damage);
-		}catch(Exception e){
-
 		}
 		return item;
 	}
