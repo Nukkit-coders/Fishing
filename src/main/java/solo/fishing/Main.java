@@ -11,7 +11,6 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.item.Item;
-import cn.nukkit.level.Sound;
 import cn.nukkit.level.Position;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.DoubleTag;
@@ -70,7 +69,6 @@ public class Main extends PluginBase implements Listener{
 			fishingHook.kill();
 		}else{
 			fishingHook.spawnToAll();
-			player.level.addSound(pos, Sound.MOB_WITCH_THROW);
 		}
 
 		this.fishing.put(player.getName(), fishingHook);
