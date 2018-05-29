@@ -93,9 +93,9 @@ public class EntityFishingHook extends EntityProjectile{
 
 		boolean hasUpdate = super.onUpdate(currentTick);
 
-		if(this.isCollidedVertically && this.isInsideOfWater()){
+		if(this.isInsideOfWater()){
 			this.motionX = 0;
-			this.motionY += 0.1;
+			this.motionY -= getGravity() * -0.02;
 			this.motionZ = 0;
 			this.motionChanged = true;
 			hasUpdate = true;
@@ -105,6 +105,11 @@ public class EntityFishingHook extends EntityProjectile{
 			this.motionZ = 0;
 			this.motionChanged = true;
 			this.keepMovement = false;
+			hasUpdate = true;
+		} else if (this.isOnGround()) {
+			this.motionX = 0;
+			this.motionY = getGravity();
+			this.motionZ = 0;
 			hasUpdate = true;
 		}
 
