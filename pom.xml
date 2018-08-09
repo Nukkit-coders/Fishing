@@ -9,13 +9,10 @@
 
 	<repositories>
 		<repository>
-			<id>regularbox</id>
-			<url>http://ci.regularbox.com/plugin/repository/everything/</url>
+			<id>nukkitx</id>
+			<url>https://repo.nukkitx.com/main/</url>
 		</repository>
 	</repositories>
-
-	<name>Fishing</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
