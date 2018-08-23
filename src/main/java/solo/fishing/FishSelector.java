@@ -20,23 +20,23 @@ public class FishSelector {
 
 	@SuppressWarnings({ "deprecation", "serial", "unchecked" })
 	public static void init() {
-		Config config = new Config(new File(Main.getInstance().getDataFolder(), "setting.yml"), Config.YAML, new LinkedHashMap<String, Object>(){{
+		Config config = new Config(new File(Main.getInstance().getDataFolder(), "settings.yml"), Config.YAML, new LinkedHashMap<String, Object>(){{
 			put("fishes", new LinkedHashMap<String, Integer>(){{
-				put("349:0", 340);
-				put("349:1", 120);
-				put("349:2", 80);
-				put("349:3", 50);
+				put("349:0", 90);
+				put("349:1", 80);
+				put("349:2", 60);
+				put("349:3", 40);
 				put("346:?", 10);
 				put("301:?", 10);
 				put("367:0", 20);
 				put("280:0", 15);
 			}});
 			put("exps", new LinkedHashMap<String, Integer>(){{
-				put("349:0", 50);
-				put("349:1", 80);
-				put("349:2", 90);
-				put("349:3", 100);
-				put("346:?", 30);
+				put("349:0", 10);
+				put("349:1", 10);
+				put("349:2", 10);
+				put("349:3", 10);
+				put("346:?", 10);
 			}});
 		}});
 
@@ -60,7 +60,7 @@ public class FishSelector {
 				current += entry.getValue();
 			}
 		}
-		return "";
+		return "349:0";
 	}
 
 	public static Item getFish(String code) {

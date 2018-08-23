@@ -25,7 +25,7 @@ public class EntityFishingHook extends EntityProjectile {
 
 	public static final int NETWORK_ID = 77;
 
-	public static final int WAIT_CHANCE = 100;
+	public static final int WAIT_CHANCE = 120;
 	public static final int CHANCE = 40;
 
 	public boolean chance = false;
@@ -283,9 +283,6 @@ public class EntityFishingHook extends EntityProjectile {
 		long ownerId = -1;
 		if (this.shootingEntity != null) {
 			ownerId = this.shootingEntity.getId();
-			if (this.shootingEntity.getId() == player.getId()) {
-				ownerId = 0;
-			}
 		}
 		pk.metadata = this.dataProperties.putLong(DATA_OWNER_EID, ownerId);
 		player.dataPacket(pk);

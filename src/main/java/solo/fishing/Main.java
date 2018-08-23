@@ -84,7 +84,7 @@ public class Main extends PluginBase implements Listener {
 				this.stopFishing(event.getPlayer());
 			} else {
 				this.startFishing(event.getPlayer());
-				event.getItem().setDamage(5);
+				event.getItem().setDamage(2);
 			}
 		}
 	}
