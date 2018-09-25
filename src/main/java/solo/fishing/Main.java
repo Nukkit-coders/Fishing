@@ -8,6 +8,7 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerItemHeldEvent;
 import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.item.Item;
+import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.DoubleTag;
 import cn.nukkit.nbt.tag.FloatTag;
@@ -52,9 +53,10 @@ public class Main extends PluginBase implements Listener {
 				.putList(new ListTag<FloatTag>("Rotation")
 						.add(new FloatTag("", (float) player.yaw))
 						.add(new FloatTag("", (float) player.pitch)));
-		double f = 0.8;
+		double f = 0.9;
 		EntityFishingHook fishingHook = new EntityFishingHook(player.chunk, nbt, player);
-		fishingHook.setMotion(fishingHook.getMotion().multiply(f));
+		fishingHook.setMotion(new Vector3(-Math.sin(Math.toRadians(player.yaw)) * Math.cos(Math.toRadians(player.pitch)) * f * f, -Math.sin(Math.toRadians(player.pitch)) * f * f,
+                Math.cos(Math.toRadians(player.yaw)) * Math.cos(Math.toRadians(player.pitch)) * f * f));
 		ProjectileLaunchEvent ev = new ProjectileLaunchEvent(fishingHook);
 		this.getServer().getPluginManager().callEvent(ev);
 		if (ev.isCancelled()) {
