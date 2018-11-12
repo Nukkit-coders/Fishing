@@ -22,7 +22,7 @@ public class Main extends PluginBase implements Listener {
 
 	public static Main instance;
 
-	public static Main getInstance(){
+	public static Main getInstance() {
 		return instance;
 	}
 
@@ -81,19 +81,21 @@ public class Main extends PluginBase implements Listener {
 
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
-		if (event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_AIR && event.getItem().getId() == Item.FISHING_ROD) {
+		Item item = event.getItem();
+
+		if (event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_AIR && item.getId() == Item.FISHING_ROD) {
 			if (this.fishing.containsKey(event.getPlayer().getName())) {
 				this.stopFishing(event.getPlayer());
 			} else {
 				this.startFishing(event.getPlayer());
-				event.getItem().setDamage(2);
+				item.setDamage(item.getDamage() + 2);
 			}
 		}
 	}
 
 	@EventHandler
 	public void onQuit(PlayerQuitEvent event) {
-		if(this.fishing.containsKey(event.getPlayer().getName())){
+		if (this.fishing.containsKey(event.getPlayer().getName())) {
 			this.fishing.remove(event.getPlayer().getName()).kill();
 		}
 	}

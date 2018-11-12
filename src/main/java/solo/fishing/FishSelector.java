@@ -11,31 +11,28 @@ import java.util.Random;
 
 public class FishSelector {
 
-	private FishSelector() {
-	}
-
 	public static int hollRate;
 	public static Map<String, Integer> fishes;
 	public static Map<String, Integer> exps;
 
 	@SuppressWarnings({ "deprecation", "serial", "unchecked" })
 	public static void init() {
-		Config config = new Config(new File(Main.getInstance().getDataFolder(), "settings.yml"), Config.YAML, new LinkedHashMap<String, Object>(){{
-			put("fishes", new LinkedHashMap<String, Integer>(){{
+		Config config = new Config(new File(Main.getInstance().getDataFolder(), "settings.yml"), Config.YAML, new LinkedHashMap<String, Object>() {{
+			put("fishes", new LinkedHashMap<String, Integer>() {{
 				put("349:0", 90);
-				put("349:1", 80);
-				put("349:2", 60);
-				put("349:3", 40);
+				put("460:0", 80);
+				put("461:0", 60);
+				put("462:0", 40);
 				put("346:?", 10);
 				put("301:?", 10);
 				put("367:0", 20);
 				put("280:0", 15);
 			}});
-			put("exps", new LinkedHashMap<String, Integer>(){{
+			put("exps", new LinkedHashMap<String, Integer>() {{
 				put("349:0", 10);
-				put("349:1", 10);
-				put("349:2", 10);
-				put("349:3", 10);
+				put("460:0", 10);
+				put("461:0", 10);
+				put("462:0", 10);
 				put("346:?", 10);
 			}});
 		}});
@@ -60,6 +57,7 @@ public class FishSelector {
 				current += entry.getValue();
 			}
 		}
+
 		return "349:0";
 	}
 
@@ -72,6 +70,7 @@ public class FishSelector {
 			tool.setDamage(random.nextInt(tool.getMaxDurability() - 20) + 20);
 			return tool;
 		}
+
 		return item;
 	}
 
@@ -79,6 +78,7 @@ public class FishSelector {
 		if (exps.containsKey(code)) {
 			return exps.get(code);
 		}
+
 		return 0;
 	}
 }

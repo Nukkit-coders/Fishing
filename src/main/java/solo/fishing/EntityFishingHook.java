@@ -6,8 +6,14 @@ import cn.nukkit.block.Block;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.item.EntityItem;
 import cn.nukkit.entity.projectile.EntityProjectile;
+import cn.nukkit.event.entity.EntityDamageEvent;
+import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
+import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
+import cn.nukkit.event.entity.EntityDamageByEntityEvent;
+import cn.nukkit.event.entity.ProjectileHitEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.format.FullChunk;
+import cn.nukkit.level.MovingObjectPosition;
 import cn.nukkit.level.particle.BubbleParticle;
 import cn.nukkit.level.particle.WaterParticle;
 import cn.nukkit.math.Vector3;
@@ -110,17 +116,15 @@ public class EntityFishingHook extends EntityProjectile {
 			hasUpdate = true;
 		}
 
-
-		// FISHING Part
 		Random random = new Random();
 
 		if (this.isInsideOfWater()) {
-			if (!this.attracted){ // wait fish attract...
+			if (!this.attracted) {
 				if (this.waitChance > 0) {
 					--this.waitChance;
 				}
 				if (this.waitChance == 0) {
-					if (new Random().nextInt(100) < 90) { // if chance success, fish attract
+					if (new Random().nextInt(100) < 90) {
 						this.attractTimer = (random.nextInt(40) + 20);
 						this.spawnFish();
 						this.coughted = false;
@@ -129,13 +133,13 @@ public class EntityFishingHook extends EntityProjectile {
 						this.waitChance = WAIT_CHANCE;
 					}
 				}
-			} else if (!this.coughted) { // fish attracted
+			} else if (!this.coughted) {
 				if (this.attractFish()) {
 					this.coughtTimer = (random.nextInt(20) + 30);
 					this.fishBites();
 					this.coughted = true;
 				}
-			} else { // fish coughted
+			} else {
 				if (this.coughtTimer > 0) {
 					--this.coughtTimer;
 				}
@@ -288,4 +292,19 @@ public class EntityFishingHook extends EntityProjectile {
 		player.dataPacket(pk);
 		super.spawnTo(player);
 	}
+
+	@Override
+    public void onCollideWithEntity(Entity entity) {
+		this.server.getPluginManager().callEvent(new ProjectileHitEvent(this, MovingObjectPosition.fromEntity(entity)));
+        float damage = this.getResultDamage();
+
+        EntityDamageEvent ev;
+        if (this.shootingEntity == null) {
+            ev = new EntityDamageByEntityEvent(this, entity, DamageCause.PROJECTILE, damage);
+        } else {
+            ev = new EntityDamageByChildEntityEvent(this.shootingEntity, this, entity, DamageCause.PROJECTILE, damage);
+        }
+
+        entity.attack(ev);
+    }
 }
