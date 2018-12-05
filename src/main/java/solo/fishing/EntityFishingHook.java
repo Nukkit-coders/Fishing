@@ -100,16 +100,14 @@ public class EntityFishingHook extends EntityProjectile {
 			this.motionX = 0;
 			this.motionY -= getGravity() * -0.03;
 			this.motionZ = 0;
-			this.motionChanged = true;
 			hasUpdate = true;
 		} else if (this.isCollided && this.keepMovement) {
 			this.motionX = 0;
 			this.motionY = 0;
 			this.motionZ = 0;
-			this.motionChanged = true;
 			this.keepMovement = false;
 			hasUpdate = true;
-		} else if (this.isOnGround()) {
+		} else if (this.isOnGround() || this.isInsideOfSolid()) {
 			this.motionX = 0;
 			this.motionY = getGravity();
 			this.motionZ = 0;
@@ -124,7 +122,7 @@ public class EntityFishingHook extends EntityProjectile {
 					--this.waitChance;
 				}
 				if (this.waitChance == 0) {
-					if (new Random().nextInt(100) < 90) {
+					if (random.nextInt(100) < 90) {
 						this.attractTimer = (random.nextInt(40) + 20);
 						this.spawnFish();
 						this.coughted = false;
