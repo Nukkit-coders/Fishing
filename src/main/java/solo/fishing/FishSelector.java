@@ -15,7 +15,7 @@ public class FishSelector {
 	public static Map<String, Integer> fishes;
 	public static Map<String, Integer> exps;
 
-	@SuppressWarnings({ "deprecation", "serial", "unchecked" })
+	@SuppressWarnings({"deprecation", "serial", "unchecked"})
 	public static void init() {
 		Config config = new Config(new File(Main.getInstance().getDataFolder(), "settings.yml"), Config.YAML, new LinkedHashMap<String, Object>() {{
 			put("fishes", new LinkedHashMap<String, Integer>() {{
