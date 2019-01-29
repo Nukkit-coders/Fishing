@@ -231,7 +231,14 @@ public class EntityFishingHook extends EntityProjectile {
             }
 
             Random random = new Random();
-            Vector3 motion = this.shootingEntity == null ? new Vector3(0, 0, 0) : new Vector3(this.shootingEntity.x - this.x, this.shootingEntity.y - this.y, this.shootingEntity.z - this.z).multiply(0.08);
+            Vector3 motion;
+
+            if (this.shootingEntity != null) {
+                motion = this.shootingEntity.subtract(this).multiply(0.1);
+                motion.y += Math.sqrt(this.shootingEntity.distance(this)) * 0.08;
+            } else {
+                motion = new Vector3();
+            }
 
             CompoundTag itemTag = NBTIO.putItemHelper(item);
             itemTag.setName("Item");
